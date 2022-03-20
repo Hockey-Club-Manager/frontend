@@ -5,12 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import Game from "./pages/game-messages";
 
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
           <Routes>
               <Route path="/" element={<App />} />
+              <Route path="/game" element={<Game />} />
           </Routes>
       </BrowserRouter>
   </React.StrictMode>,

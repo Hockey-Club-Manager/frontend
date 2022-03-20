@@ -80,7 +80,7 @@ function BidModal ({show, onHide}) {
         const isInGame = typeof _myGameID === "number";
 
         if(isInGame) {
-          navigate('/game-messages');
+          navigate('/game');
         }
       } else console.log('No one have selected your bid yet');
     }).catch(e => console.error('get available games: ', e));
@@ -179,7 +179,7 @@ export default function Home() {
           const _myGameID = gamesWithMyID[0][0];
           const isInGame = typeof _myGameID === "number";
 
-          if (isInGame) navigate('/game-messages');
+          if (isInGame) navigate('/game');
           else showBid();
         } else showBid();
       } else showBid();
