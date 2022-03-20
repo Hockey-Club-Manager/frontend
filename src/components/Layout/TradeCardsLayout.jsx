@@ -13,11 +13,11 @@ export default function TradeCardsLayout({children}) {
                         <FontAwesomeIcon icon={faArrowLeft} width='25' />
                     </Navbar.Brand>
                     <Nav className='me-auto'>
-                        <Nav.Link href='/trade-cards/buy-packs' disabled={location.pathname === '/trade-cards/buy-packs'}>Buy packs</Nav.Link>
+                        {/*<Nav.Link href='/trade-cards/buy-packs' disabled={location.pathname === '/trade-cards/buy-packs'}>Buy packs</Nav.Link>*/}
                         <Nav.Link href='/trade-cards/buy-cards' disabled={location.pathname === '/trade-cards/buy-cards'}>Buy cards</Nav.Link>
                         <Nav.Link href='/trade-cards/sell-cards' disabled={location.pathname === '/trade-cards/sell-cards'}>Sell cards</Nav.Link>
-                        <Nav.Link href='/trade-cards/free-agents' disabled={location.pathname === '/trade-cards/free-agents'}>Free agents</Nav.Link>
-                        <Nav.Link href='/trade-cards/mint-nft' disabled={location.pathname === '/trade-cards/mint-nft'}>Mint NFT</Nav.Link>
+                        {/*<Nav.Link href='/trade-cards/free-agents' disabled={location.pathname === '/trade-cards/free-agents'}>Free agents</Nav.Link>*/}
+                        {/*<Nav.Link href='/trade-cards/mint-nft' disabled={location.pathname === '/trade-cards/mint-nft'}>Mint NFT</Nav.Link>*/}
                     </Nav>
                     <Navbar.Brand href='/'>
                         <img alt='Logo' src='/logo.png' width='40' className='d-inline-block align-top' />

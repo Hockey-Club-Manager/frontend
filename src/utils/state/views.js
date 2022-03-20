@@ -1,4 +1,6 @@
-import {getMarketContract, getNftContract, getObjects, nftContractName} from "../near";
+import {getGameContract, getMarketContract, getNftContract, getObjects, nftContractName} from "../near";
+
+const GAS = "200000000000000";
 
 const BAD_OWNER_ID = [];
 // api-helper config
@@ -122,3 +124,38 @@ export const loadSales = async (fromIndex = 0, limit = 50) => {
 
     return sales
 };
+
+// may include nft and non-nft
+export async function loadUserTeam() {
+    const {wallet}  = await getObjects();
+    const account = wallet.account();
+    const contract = getGameContract(wallet);
+
+    if (account) {
+        return await contract.get_owner_team({account_id: account.accountId}, GAS);
+    }
+}
+
+export async function loadUserNftTeam() {
+    const {wallet}  = await getObjects();
+    const account = wallet.account();
+    const nftContract = getNftContract(wallet);
+
+    if (account) {
+        return await nftContract.get_owner_nft_team({account_id: account.accountId});
+    }
+}
+
+export async function loadUserNFTPlayers() {
+    const {wallet}  = await getObjects();
+    const account = wallet.account();
+    const nftContract = getNftContract(wallet);
+
+    if (account) {
+        return await nftContract.nft_tokens_for_owner({
+            account_id: account.accountId,
+            from_index: '0',
+            limit: 50
+        });
+    }
+}
