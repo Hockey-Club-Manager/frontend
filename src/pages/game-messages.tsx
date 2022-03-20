@@ -321,9 +321,10 @@ export default function Game() {
         setAutoReload(a => !a);
     }
 
-    function takeTO() {
-        contract.take_to({game_id: myGameID.current}, GAS_MOVE);
-    }
+    const takeTO = () => contract.take_to({game_id: myGameID.current}, GAS_MOVE);
+    const takeSpeech = () => contract.coach_speech({game_id: myGameID.current}, GAS_MOVE);
+    const goalieOut = () => contract.goalie_out({game_id: myGameID.current}, GAS_MOVE);
+    const goalieBack = () => contract.goalie_back({game_id: myGameID.current}, GAS_MOVE);
 
     return <Container>
         <Row className='mt-4'>
@@ -350,10 +351,15 @@ export default function Game() {
                         <Button onClick={takeTO}>Take TO</Button>
                     </Col>
                     <Col className='col-auto'>
-                        <Button onClick={switchAutoReload}>Empty net</Button>
+                        <Button onClick={goalieOut}>Goalie out</Button>
                     </Col>
                     <Col className='col-auto'>
-                        <Button>Take speech</Button>
+                        <Button onClick={takeSpeech}>Take speech</Button>
+                    </Col>
+                </Row>
+                <Row className="mt-1 justify-content-center">
+                    <Col className='col-auto'>
+                        <Button onClick={goalieBack}>Goalie Back</Button>
                     </Col>
                 </Row>
             </Col>
