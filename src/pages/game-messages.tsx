@@ -46,18 +46,18 @@ const BenchRow = styled(Row)`
   margin-top: 80px;
 `
 
-const Timer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: dodgerblue;
-  padding: 5px 20px;
-  font-size: 30px;
-  border-radius: 0 0 0 15px;
-  border-left: 2px solid white;
-  border-bottom: 2px solid white;
-`
-
+// const Timer = styled.div`
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   background-color: dodgerblue;
+//   padding: 5px 20px;
+//   font-size: 30px;
+//   border-radius: 0 0 0 15px;
+//   border-left: 2px solid white;
+//   border-bottom: 2px solid white;
+// `
+//
 const MessageDiv = styled.div`
   background-color: #ededed;
   width: 200px;
@@ -260,7 +260,7 @@ export default function Game() {
                         const accountId = wallet.account().accountId;
                         const gamesWithMyID = r.filter(game => game[1][0] === accountId || game[1][1] === accountId);
                         if (gamesWithMyID.length) {
-                            const myGame = gamesWithMyID[0][0];
+                            const myGame = gamesWithMyID[0];
                             const _myGameID = myGame[0];
                             myGameID.current = _myGameID;
                             setPlayers(myGame[1]);
@@ -320,6 +320,11 @@ export default function Game() {
         }
         setAutoReload(a => !a);
     }
+
+    function takeTO() {
+        contract.take_to({game_id: myGameID.current}, GAS_MOVE);
+    }
+
     return <Container>
         <Row className='mt-4'>
             <Col className='text-center' xs={5}>
@@ -342,7 +347,7 @@ export default function Game() {
                 </Field>
                 <Row className='mt-4 justify-content-between'>
                     <Col className='col-auto'>
-                        <Button onClick={switchAutoGenerate}>Take TO</Button>
+                        <Button onClick={takeTO}>Take TO</Button>
                     </Col>
                     <Col className='col-auto'>
                         <Button onClick={switchAutoReload}>Empty net</Button>
@@ -357,13 +362,13 @@ export default function Game() {
                     <Col xs={8}>
                         <Row className='justify-content-start'>
                             <Col className='col-auto'>
-                                <LogoSquare className='u-1' />
+                                <LogoSquare className='u-1' onClick={switchAutoGenerate} />
                             </Col>
                             <Col className='col-auto'>
                                 <h1>2 - 0</h1>
                             </Col>
                             <Col className='col-auto'>
-                                <LogoSquare className='u-2' />
+                                <LogoSquare className='u-2' onClick={switchAutoReload} />
                             </Col>
                         </Row>
                         <Row className='mt-5 justify-content-around'>
@@ -413,6 +418,6 @@ export default function Game() {
                 </Row>
             </Col>
         </Row>
-        <Timer>2:32</Timer>
+        {/*<Timer>2:32</Timer>*/}
     </Container>
 }

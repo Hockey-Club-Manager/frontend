@@ -40,7 +40,9 @@ export function getGameContract(wallet) {
         gameContractName,
         {
             viewMethods: ['get_available_players', 'get_available_games', 'is_already_in_the_waiting_list', 'get_game_config',],
-            changeMethods: ['make_available', 'start_game', 'generate_event', 'make_unavailable', 'internal_stop_game'],
+            changeMethods: ['make_available', 'start_game', 'generate_event', 'make_unavailable', 'internal_stop_game',
+                'take_to', 'coach_speech', 'goalie_out',
+            ],
         }
     );
 }
