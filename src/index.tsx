@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Game from "./pages/game-messages";
+import ContractsTest from "./pages/contracts-test";
+import BuyCards from "./pages/trade-cards/buy-cards";
+import BuyCardView from "./pages/trade-cards/buy-cards/id";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,6 +16,9 @@ ReactDOM.render(
           <Routes>
               <Route path="/" element={<App />} />
               <Route path="/game" element={<Game />} />
+              <Route path="/contracts-test" element={<ContractsTest />} />
+              <Route path="/trade-cards/buy-cards" element={<BuyCards />} />
+              <Route path="/trade-cards/buy-cards/:tokenId" element={<BuyCardView />} />
           </Routes>
       </BrowserRouter>
   </React.StrictMode>,

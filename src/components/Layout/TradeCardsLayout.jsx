@@ -1,3 +1,4 @@
+import React from "react";
 import {Col, Container, Dropdown, DropdownButton, Form, Nav, Navbar, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
@@ -5,9 +6,7 @@ import {useLocation} from "react-router-dom";
 
 export default function TradeCardsLayout({children}) {
     const location = useLocation();
-
-    return (
-        <>
+    return <>
             <Navbar bg='dark' variant='dark'>
                 <Container>
                     <Navbar.Brand href='/'>
@@ -46,5 +45,4 @@ export default function TradeCardsLayout({children}) {
             </Row>
             {children}
         </>
-    )
 }
