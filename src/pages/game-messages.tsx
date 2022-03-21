@@ -457,21 +457,31 @@ export default function Game() {
                         </Row>
                         <Row className='mt-5 justify-content-around'>
                             <Col className='col-auto'>
-                                <PlayingCard />
+                                <PlayingCard>
+                                    <img src='/nft-players/1.png' />
+                                </PlayingCard>
                             </Col>
                             <Col className='col-auto'>
-                                <PlayingCard />
+                                <PlayingCard>
+                                    <img src='/nft-players/2.png' />
+                                </PlayingCard>
                             </Col>
                             <Col className='col-auto'>
-                                <PlayingCard />
+                                <PlayingCard>
+                                    <img src='/nft-players/3.png' />
+                                </PlayingCard>
                             </Col>
                         </Row>
                         <Row className='mt-3 mb-5 justify-content-around'>
                             <Col className='col-auto'>
-                                <PlayingCard className='bottom-left' />
+                                <PlayingCard>
+                                    <img src='/nft-players/4.png' />
+                                </PlayingCard>
                             </Col>
                             <Col className='col-auto'>
-                                <PlayingCard className='bottom-right' />
+                                <PlayingCard>
+                                    <img src='/nft-players/5.png' />
+                                </PlayingCard>
                             </Col>
                         </Row>
                         <Dropdown as={ButtonGroup} className='mt-5 mb-3'>
@@ -491,7 +501,9 @@ export default function Game() {
                         Ice time priority: {iceTimePriority}
                     </Col>
                     <Col>
-                        <PlayingCard className='goalie-game' />
+                        <PlayingCard className='goalie-game'>
+                            <img src='/nft-players/goalie.png' />
+                        </PlayingCard>
                         <BenchRow className='justify-content-center'>
                             <Col xs={1} className='m-0'>
                                 <PlayingCard className='sm bench'>

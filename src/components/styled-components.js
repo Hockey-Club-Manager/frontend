@@ -14,10 +14,10 @@ export const CircleBtn = styled(Button)`
 `
 export const PlayingCard = styled.div`
   background-color: wheat;
-  height: 125px;
-  width: 80px;
   
   &, & img {
+    height: 125px;
+    width: 80px;
     border-radius: 10px;
   }
 
