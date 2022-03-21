@@ -189,6 +189,11 @@ export default function Game() {
             }
 
             pushEventMessage(eventMessage);
+
+            if (event.action === ActionTypes.EndOfPeriod) {
+                incrementLocalPeriod();
+                setPeriod(getLocalPeriod);
+            }
         } else {
             const side: PlayerSide = event.playerWithPuck.userID === 1 ? 'left' : 'right';
 
@@ -215,7 +220,7 @@ export default function Game() {
     }, [event]);
 
     const localReceivedEventsKey = 'receivedEvents';
-    function getLocalReceivedEvents() {
+    function getLocalReceivedEvents(): number {
         return parseInt(localStorage.getItem(localReceivedEventsKey)) || 0;
     }
     function setLocalReceivedEvents(value) {
@@ -236,9 +241,19 @@ export default function Game() {
     }
     const [score, setScore] = useState<number[]>(getLocalScore());
 
+    const localPeriodKey = 'period';
+    function getLocalPeriod(): number {
+        return parseInt(localStorage.getItem(localPeriodKey)) || 1;
+    }
+    function incrementLocalPeriod() {
+        localStorage.setItem(localPeriodKey, (getLocalPeriod() + 1).toString());
+    }
+    const [period, setPeriod] = useState<number>(getLocalPeriod);
+
     function endGame() {
         setLocalReceivedEvents(0);
         localStorage.removeItem(localScoreKey);
+        localStorage.removeItem(localPeriodKey);
         clearInterval(eventsIntervalID);
         myGameID.current = null;
         setPlayers(null);
@@ -382,7 +397,7 @@ export default function Game() {
     return <Container>
         <Row className='mt-4'>
             <Col className='text-center' xs={5}>
-                <h1>Period 2</h1>
+                <h1>Period {period}</h1>
                 <Field>
                     {eventMessagesBuffer?.map(e => {
                             if (e.actionType === DisplayableActionType.MessageAction)
