@@ -35,6 +35,16 @@ const ActionButton = styled(Button)`
   width: 100px;
 `
 
+const InDevelopmentTxt = styled.h1`
+  z-index: 99;
+  color: red;
+  font-size: 120px;
+  transform: rotate(-35deg);
+  position: absolute;
+  top: 40%;
+  left: 25%;
+`
+
 export default function SetLineups() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [team, setTeam] = useState();
@@ -131,5 +141,6 @@ export default function SetLineups() {
                 </Row>
             </Col>
         </Row>
+        <InDevelopmentTxt><b>In Development</b></InDevelopmentTxt>
     </SContainer>
 }

@@ -122,7 +122,6 @@ export default function BuyCardView() {
                     <Col className='col-12 col-xs-12 col-sm-12 col-md-7'>
                         <CardInfo>
                             <h2>{nft?.metadata?.title}</h2>
-                            <h2>Other card info</h2>
                             <h5>{accountID !== nft?.owner_id ? `Owner: ${nft?.owner_id}` : 'You are the owner' }</h5>
                         </CardInfo>
                         <Row className='justify-content-center mt-4'>

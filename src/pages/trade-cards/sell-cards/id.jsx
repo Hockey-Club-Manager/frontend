@@ -99,13 +99,11 @@ export default function SellCardView() {
                     </Col>
                     <Col className='col-12 col-xs-12 col-sm-12 col-md-7'>
                         <CardInfo>
-                            <h1>Card info</h1>
-                            <h2>Other card info</h2>
-                            <h3>Even more info</h3>
+                            <h3>You are the owner</h3>
                         </CardInfo>
                         <Row className='justify-content-center mt-4'>
                             <Col className='col-auto'>
-                                <Button variant='secondary' onClick={handleBuyCardPriceModalOpen}>Buy for 6 Ⓝ</Button>
+                                <Button variant='secondary' onClick={handleBuyCardPriceModalOpen}>Sell</Button>
                             </Col>
                         </Row>
                     </Col>
@@ -189,12 +187,11 @@ export default function SellCardView() {
                             </Row>
                             <Row className='justify-content-start'>
                                 <Col className='col-auto'>
-                                    {/*<Col>*/}
-                                    <Form.Group>
-                                        <Form.Check />
-                                    </Form.Group>
+                                    <Form.Control placeholder='price' type='number' />
                                 </Col>
-                                <Col className='col-2'><FontAwesomeIcon icon={faInfoCircle} /></Col>
+                                <Col className='col-auto'>
+                                    <h3>Ⓝ</h3>
+                                </Col>
                             </Row>
                             <Row>
                                 <Col className='text-center'>
