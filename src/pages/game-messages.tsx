@@ -364,6 +364,16 @@ export default function Game() {
         setAutoReload(a => !a);
     }
 
+    useEffect(() => {
+        switchAutoGenerate();
+        switchAutoReload();
+
+        return () => {
+            switchAutoGenerate();
+            switchAutoReload();
+        }
+    }, []);
+
     const takeTO = () => contract.take_to({game_id: myGameID.current}, GAS_MOVE);
     const takeSpeech = () => contract.coach_speech({game_id: myGameID.current}, GAS_MOVE);
     const goalieOut = () => contract.goalie_out({game_id: myGameID.current}, GAS_MOVE);
@@ -436,13 +446,13 @@ export default function Game() {
                     <Col xs={8}>
                         <Row className='justify-content-start'>
                             <Col className='col-auto'>
-                                <LogoSquare className='u-1' onClick={switchAutoGenerate} />
+                                <LogoSquare className='u-1' />
                             </Col>
                             <Col className='col-auto'>
                                 <h1>{score[0]} - {score[1]}</h1>
                             </Col>
                             <Col className='col-auto'>
-                                <LogoSquare className='u-2' onClick={switchAutoReload} />
+                                <LogoSquare className='u-2' />
                             </Col>
                         </Row>
                         <Row className='mt-5 justify-content-around'>
