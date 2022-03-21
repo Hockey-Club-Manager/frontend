@@ -407,7 +407,8 @@ export default function Game() {
     return <Container>
         <Row className='mt-4'>
             <Col className='text-center' xs={5}>
-                <h1>Period {period}</h1>
+                { period < 4 && <h1>Period {period}</h1> }
+                { period > 3 && <h1>Overtime</h1> }
                 <Field>
                     {eventMessagesBuffer?.map(e => {
                             if (e.actionType === DisplayableActionType.MessageAction)

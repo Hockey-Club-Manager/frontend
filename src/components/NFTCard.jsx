@@ -1,7 +1,5 @@
 import {Link} from "react-router-dom";
 import {Button, Card, Col, Row} from "react-bootstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSass} from "@fortawesome/free-brands-svg-icons";
 import styled from "styled-components";
 import {nanoid} from 'nanoid';
 import {useState} from "react";
@@ -35,11 +33,6 @@ export default function NFTCard({imgURL, year, position, name, number, role, sta
                 </Col>
                 <Col className='col-auto'>
                     <Card.Title className='text-white'>{position}</Card.Title>
-                </Col>
-            </Row>
-            <Row className="justify-content-end">
-                <Col className="col-auto">
-                    <FontAwesomeIcon icon={faSass} size='2x' width='35' className='text-white' />
                 </Col>
             </Row>
             <div className='mt-auto'>

@@ -122,11 +122,17 @@ export default function BuyCardView() {
                     <Col className='col-12 col-xs-12 col-sm-12 col-md-7'>
                         <CardInfo>
                             <h2>{nft?.metadata?.title}</h2>
+                            {nftExtra && <>
+                                <h4>Number: {nftExtra?.number}</h4>
+                                <h4>Position: {nftExtra?.position}</h4>
+                                <h4>Role: {nftExtra?.role}</h4>
+                                <h4>Stats: {JSON.parse(nftExtra?.stats)?.map(s => s + ' ')}</h4>
+                            </>}
                             <h5>{accountID !== nft?.owner_id ? `Owner: ${nft?.owner_id}` : 'You are the owner' }</h5>
                         </CardInfo>
                         <Row className='justify-content-center mt-4'>
                             <Col className='col-auto'>
-                                <Button variant='secondary' onClick={handleBuyCardOfferModalOpen}>Buy for 6 Ⓝ</Button>
+                                <Button variant='secondary' onClick={handleBuyCardOfferModalOpen}>Buy</Button>
                             </Col>
                         </Row>
                     </Col>
