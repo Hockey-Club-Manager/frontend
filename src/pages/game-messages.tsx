@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {Button, ButtonGroup, Col, Container, Dropdown, Row} from "react-bootstrap";
+import {Button, ButtonGroup, Col, Container, Dropdown, Form, Row} from "react-bootstrap";
 import {PlayingCard} from "../components/styled-components";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
@@ -7,8 +7,16 @@ import {getGameContract, getObjects} from "../utils/near";
 import {nanoid} from "nanoid";
 import {
     Event,
-    FromGameMessageActions, GoalieActions, OnePlayerActions,
-    PlayerSide, RegularActions, ShotActions, UserActions,
+    FromGameMessageActions,
+    GoalieActions,
+    iceTimePriorities,
+    IceTimePriority,
+    OnePlayerActions,
+    PlayerSide,
+    RegularActions,
+    ShotActions,
+    Tactics,
+    UserActions,
     UserID,
 } from "../utils/nft-hockey-api";
 
@@ -171,6 +179,8 @@ export default function Game() {
 
     useEffect(() => {
         if (!event) return;
+        // console.log(event.myTeam.five.toRustString());
+        // console.log(JSON.parse( event.myTeam.five.toRustString()));
         if (FromGameMessageActions.includes(event.action)) {
             const eventMessage: NonMessageAction = {
                 actionType: DisplayableActionType.FromGameMessageAction,
@@ -326,6 +336,31 @@ export default function Game() {
     const goalieOut = () => contract.goalie_out({game_id: myGameID.current}, GAS_MOVE);
     const goalieBack = () => contract.goalie_back({game_id: myGameID.current}, GAS_MOVE);
 
+    const [iceTimePriorityNum, setIceTimePriorityNum] = useState<number>(2);
+    const [iceTimePriority, setIceTimePriority] = useState<IceTimePriority>(IceTimePriority.Normal);
+
+    function changeIceTimePriority(e) {
+        setIceTimePriorityNum(e.target.value);
+        setIceTimePriority(iceTimePriorities[e.target.value]);
+    }
+
+    function contractChangeIceTimePriority(priority: IceTimePriority) {
+        if (typeof myGameID.current === 'number' && event)
+            contract.change_ice_priority({
+                ice_time_priority: priority,
+                five: event.myTeam.five.number,
+                game_id: myGameID.current,
+            }, GAS_MOVE);
+    }
+
+    function changeTactic(tactic: Tactics): void {
+        if (typeof myGameID.current === 'number' && event)
+            contract.change_tactic({
+                tactic: tactic,
+                game_id: myGameID.current,
+            }, GAS_MOVE);
+    }
+
     return <Container>
         <Row className='mt-4'>
             <Col className='text-center' xs={5}>
@@ -400,11 +435,17 @@ export default function Game() {
                             <SelectDropdownBtn variant='outline-primary'>Tactics</SelectDropdownBtn>
                             <Dropdown.Toggle variant='outline-primary' />
                             <Dropdown.Menu>
-                                <Dropdown.Item>Not </Dropdown.Item>
-                                <Dropdown.Item>yet</Dropdown.Item>
-                                <Dropdown.Item>implemented</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>changeTactic(Tactics.SuperDefensive)}>Super defensive</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>changeTactic(Tactics.Defensive)}>Defensive</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>changeTactic(Tactics.Neutral)}>Neutral</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>changeTactic(Tactics.Offensive)}>Offensive</Dropdown.Item>
+                                <Dropdown.Item onClick={()=>changeTactic(Tactics.SuperOffensive)}>Super offensive</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
+                        <Form.Range min={0} max={4} step={1} value={iceTimePriorityNum}
+                        onChange={changeIceTimePriority}
+                        onMouseUp={() => contractChangeIceTimePriority(iceTimePriorities[iceTimePriorityNum])} />
+                        Ice time priority: {iceTimePriority}
                     </Col>
                     <Col>
                         <PlayingCard className='goalie-game' />

@@ -93,6 +93,10 @@ export enum IceTimePriority {
     HighPriority = "HighPriority",
     SuperHighPriority = "SuperHighPriority",
 }
+export const iceTimePriorities: IceTimePriority[] = [
+    IceTimePriority.SuperLowPriority, IceTimePriority.LowPriority, IceTimePriority.Normal,
+    IceTimePriority.HighPriority, IceTimePriority.SuperHighPriority,
+];
 
 export class Five {
     constructor(
@@ -254,3 +258,11 @@ export class Event {
 }
 
 export type PlayerSide = 'left'|'right';
+
+export enum Tactics {
+    SuperDefensive = "SuperDefensive",
+    Defensive = "Defensive",
+    Neutral = "Neutral",
+    Offensive = "Offensive",
+    SuperOffensive = "SuperOffensive",
+}
