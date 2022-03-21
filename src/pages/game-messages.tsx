@@ -6,6 +6,7 @@ import {useNavigate} from "react-router-dom";
 import {getGameContract, getObjects} from "../utils/near";
 import {nanoid} from "nanoid";
 import {
+    ActionTypes,
     Event,
     FromGameMessageActions,
     GoalieActions,
@@ -205,6 +206,11 @@ export default function Game() {
             const eventMessage: MessageAction = getEventMessage(event, username, side);
 
             pushEventMessage(eventMessage);
+
+            if (event.action === ActionTypes.Goal) {
+                incrementLocalScore(event.playerWithPuck.userID - 1);
+                setScore(getLocalScore());
+            }
         }
     }, [event]);
 
@@ -219,8 +225,20 @@ export default function Game() {
         localStorage.setItem(localReceivedEventsKey, getLocalReceivedEvents() + incrementBy);
     }
 
+    const localScoreKey = 'score';
+    function getLocalScore(): number[] {
+       return JSON.parse(localStorage.getItem(localScoreKey)) || [0, 0];
+    }
+    function incrementLocalScore(index: number): void {
+        const currentScore: number[] = getLocalScore();
+        currentScore[index] = currentScore[index] + 1;
+        localStorage.setItem(localScoreKey, JSON.stringify(currentScore));
+    }
+    const [score, setScore] = useState<number[]>(getLocalScore());
+
     function endGame() {
         setLocalReceivedEvents(0);
+        localStorage.removeItem(localScoreKey);
         clearInterval(eventsIntervalID);
         myGameID.current = null;
         setPlayers(null);
@@ -406,7 +424,7 @@ export default function Game() {
                                 <LogoSquare className='u-1' onClick={switchAutoGenerate} />
                             </Col>
                             <Col className='col-auto'>
-                                <h1>2 - 0</h1>
+                                <h1>{score[0]} - {score[1]}</h1>
                             </Col>
                             <Col className='col-auto'>
                                 <LogoSquare className='u-2' onClick={switchAutoReload} />
