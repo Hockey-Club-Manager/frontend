@@ -1,14 +1,33 @@
 import React from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {Alert, Button, Col, Form, Modal, Row, Table} from "react-bootstrap";
-// import Settings from "../components/settings";
 import {useEffect, useState} from "react";
-import Settings, {SModal} from "./components/Settings";
+import {SModal} from "./components/Settings";
 // import SetTactics from "../components/SetTactics";
 import * as nearAPI from "near-api-js";
 import {gameContractName, getGameContract, getObjects} from "./utils/near";
 import {nanoid} from "nanoid";
-import SetTactics from "./components/SetTactics";
+import styled from "styled-components";
+
+const Smain = styled.main`
+  height: 100vh;
+ background-image: url("/menu-image.png");
+  background-size: auto 100% ;
+`
+
+const SignOutBtn = styled(Button)`
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 0 0 0 15px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+`
+const MainRow = styled(Row)`
+  height: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+`
 
 function BidModal ({show, onHide}) {
   const GAS_MAKE_AVAILABLE = 300_000_000_000_000;
@@ -154,7 +173,7 @@ function BidModal ({show, onHide}) {
 }
 
 export default function Home() {
-  const [showSettings, setShowSettings] = useState(false);
+  // const [showSettings, setShowSettings] = useState(false);
   const [isShowBidModal, setIsShowBidModal] = useState(false);
   const [isSigned, setIsSigned] = useState(false);
 
@@ -219,27 +238,34 @@ export default function Home() {
   };
 
   return (
-      <main>
-        <Settings show={showSettings} setShow={setShowSettings} />
-        <Button onClick={()=>setShowSettings(true)}>Settings</Button>
-        <Link to='/trade-cards/buy-cards'><Button>Trade cards</Button></Link>
-        <SetTactics/>
+      <Smain>
+        {/*<Settings show={showSettings} setShow={setShowSettings} />*/}
+        {/*<Button onClick={()=>setShowSettings(true)}>Settings</Button>*/}
+        {/*<SetTactics/>*/}
 
-        <Link to='/manage-team/set-lineups' className='btn btn-primary'>Set lineups</Link>
-        <Link to='/image-menu-test' className='btn btn-primary'>Image menu</Link>
+        {/*<Link to='/image-menu-test' className='btn btn-primary'>Image menu</Link>*/}
         {isSigned ? <>
-              <BidModal show={isShowBidModal} onHide={hideBid} />
-              <Button onClick={handlePlayGame}>Play game</Button>
-              <Link to='/contracts-test' className='btn btn-warning'><code>contracts test</code></Link>
-              <br/>
-              <Button variant='dark' onClick={()=>signOut()}>Sign out</Button>
+            <MainRow className='justify-content-between align-content-center'>
+              <Col className="col-auto mx-5">
+                <Link to='/trade-cards/buy-cards'><Button size='lg'>Trade cards</Button></Link>
+              </Col>
+              <Col className="col-auto mx-5">
+                <Button size='lg' onClick={handlePlayGame}>Play game</Button>
+              </Col>
+              <Col className='col-auto'>
+                <Link to='/manage-team/set-lineups' className='btn btn-primary btn-lg'>Set lineups</Link>
+              </Col>
+            </MainRow>
+              {/*<Link to='/contracts-test' className='btn btn-warning'><code>contracts test</code></Link>*/}
+            <BidModal show={isShowBidModal} onHide={hideBid} />
+            <SignOutBtn variant='dark' onClick={signOut}>Sign out</SignOutBtn>
             </>
             :
-            <Button variant='dark' onClick={()=>signIn()}>Sign in</Button>
+            <Button variant='dark' onClick={signIn}>Sign in</Button>
         }
         {/*{isSigned && <>*/}
         {/*    <h3>{balance}</h3>*/}
         {/*</>}*/}
-      </main>
+      </Smain>
   )
 }
