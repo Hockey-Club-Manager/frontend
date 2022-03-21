@@ -13,6 +13,7 @@ import SellCards from "./pages/trade-cards/sell-cards";
 import SellCardView from "./pages/trade-cards/sell-cards/id";
 import SetLineups from "./pages/manage-team/set-lineups";
 import Result from "./pages/result";
+import MintNft from "./pages/trade-cards/mint-nft";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.render(
               <Route path="/trade-cards/buy-cards/:tokenId" element={<BuyCardView />} />
               <Route path="/trade-cards/sell-cards" element={<SellCards />} />
               <Route path="/trade-cards/sell-cards/:tokenId" element={<SellCardView />} />
+              <Route path="/trade-cards/mint-nft" element={<MintNft />} />
               <Route path="/manage-team/set-lineups" element={<SetLineups />} />
               <Route path="/result" element={<Result />} />
           </Routes>
