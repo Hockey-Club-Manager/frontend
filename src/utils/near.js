@@ -2,8 +2,8 @@ import * as nearAPI from "near-api-js";
 import {parseNearAmount} from "near-api-js/lib/utils/format";
 
 export const gameContractName = "uriyyuriy.testnet";
-export const marketContractName = "new_nft_market.testnet";
-export const nftContractName = "new_nft_contract.testnet";
+export const marketContractName = "nft-marketplace.testnet";
+export const nftContractName = "nft-0_0.testnet";
 
 const GAS = "200000000000000";
 
